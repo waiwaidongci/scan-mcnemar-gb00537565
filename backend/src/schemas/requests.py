@@ -24,6 +24,12 @@ class ReviewRequest(Request):
     note: str = Field(min_length=1, max_length=500)
     decision: str = Field(default='', max_length=120)
 
+class PlanRequest(Request):
+    dataset_id: int = Field(gt=0)
+    name: str = Field(min_length=1, max_length=120)
+    params: dict = Field(default_factory=dict)
+    alphas: list[float] | None = Field(default=None, max_length=5000)
+
 class ScheduleRequest(RunRequest):
     recipient: str = Field(min_length=1, max_length=100)
     first_at: datetime

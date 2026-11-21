@@ -9,9 +9,9 @@ def safe_cell(value):
     return value
 
 
-def write_report(run_id, attempt, result):
+def write_report(run_id, attempt, result, prefix='analysis'):
     ARTIFACTS.mkdir(parents=True, exist_ok=True)
-    name = f'analysis-{run_id}-{attempt}.csv'
+    name = f'{prefix}-{run_id}-{attempt}.csv'
     path = ARTIFACTS / name
     staging = path.with_suffix('.tmp')
     with staging.open('w', encoding='utf-8-sig', newline='') as output:

@@ -15,3 +15,17 @@ class Review(StrEnum):
     PENDING = 'pending'
     ACCEPTED = 'accepted'
     RETURNED = 'returned'
+
+class PlanStatus(StrEnum):
+    ACTIVE = 'active'
+    SEALED = 'sealed'
+
+class LookStatus(StrEnum):
+    PENDING = 'pending'
+    RUNNING = 'running'
+    COMPLETE = 'complete'
+    FAILED = 'failed'
+
+class Conclusion(StrEnum):
+    PASS = 'pass'
+    CONTINUE = 'continue'

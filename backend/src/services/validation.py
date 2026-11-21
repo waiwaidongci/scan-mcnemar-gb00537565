@@ -77,3 +77,10 @@ def normalize_params(params):
     if set(params) - {field['key'] for field in fields}:
         raise ValueError('存在未知运行参数，请重新打开工作面板')
     return {field['key']: cell(field, params.get(field['key'], field['default'])) for field in fields}
+
+
+def normalize_plan_params(params):
+    fields = SPEC['plan_params']
+    if not isinstance(params, dict) or set(params) - {field['key'] for field in fields}:
+        raise ValueError('存在未知计划参数，请重新打开分批验收面板')
+    return {field['key']: cell(field, params.get(field['key'], field['default'])) for field in fields}
