@@ -2,6 +2,7 @@
 
 from collections import Counter
 from fractions import Fraction
+from decimal import Decimal
 
 from .analysis import _display_p_value, _exact_p_value, _table, validate_rows
 
@@ -38,7 +39,7 @@ def build_schedule(rows, alphas, alpha_total, min_gain_pp):
         raise ValueError(f"数据共 {len(order)} 个扫描批次，请为每个批次各提供一个显著性额度。")
     if any(value <= 0 or value >= 1 for value in values):
         raise ValueError("每次查看的显著性额度须在 0 与 1 之间且大于 0。")
-    if sum(values) > float(alpha_total) + 1e-9:
+    if sum((Decimal(str(value)) for value in values), Decimal('0')) > Decimal(str(alpha_total)):
         raise ValueError("各次显著性额度之和不能超过总上限。")
     return [
         {"sequence": index, "batch_id": batch_id, "alpha": alpha, "min_gain_pp": float(min_gain_pp)}
